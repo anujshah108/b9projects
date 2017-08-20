@@ -1,12 +1,18 @@
-var SplitterManager = artifacts.require("./MetaCoin.sol");
+var SplitterManager = artifacts.require("./SplitterManager.sol");
 
 contract('SplitterManager', function(accounts) {
+  let instance;
+  let original_balance;
+
   it("splits even amount in two and stores $$", function() {
-    return SplitterManager.deployed().then(function(instance) {
-      return instance.createSplitter(accounts[2],accounts[1]).sendTransaction({from:accounts[0], value:10});
+    return SplitterManager.deployed().then(function(_instance) {
+      instance = _instance
+      return instance.createSplitter(accounts[2],accounts[1],{from:accounts[0], value:10});
     }).then(function(txHash) {
-      console.log(txHash)
-      assert.equal(balance.valueOf(), 10000, "10000 wasn't in the first account");
+    return instance.withdrawFunds({from:accounts[2]});
+  }).then(function(txHash){
+       console.log("HELLLLLLLLLO", txHash)
+      assert.equal(instance.contract.getBalance(accounts[2])-original_balance, 5, "10000 wasn't in the first account");
     });
   });
 

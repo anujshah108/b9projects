@@ -25,7 +25,7 @@ contract RemittanceManager is Owned {
 	event LogCollectedRemittance(address collector, uint amount, bytes32 password, uint blockNumber);
 	event LogExpiredRemittance(address sender, bytes32 password, uint blockNumber);
 
-	// sender of the remittance does hash of codeA, codeB and collector address beforehand
+	// sender of the remittance does hash of codeA, codeB, perhaps on frontend
 	function newRemittance(bytes32 password, uint timeValid) payable returns (bool) {
 		pendingRemittances[password] = Remittance({
 
@@ -42,7 +42,7 @@ contract RemittanceManager is Owned {
 
 	//thinking of adding a way to hash codes on front end so they are not sent to blockchain but then would need to still verify sender
 	function collectRemittance(bytes32 codeA, bytes32 codeB) returns(bool){
-		bytes32 password = keccak256(codeA, codeB, msg.sender);
+		bytes32 password = keccak256(codeA, codeB);
 		Remittance storage currentRemittance = pendingRemittances[password];
 
 		require(currentRemittance.deadline > block.number);
