@@ -1,0 +1,276 @@
+{
+  "contract_name": "RemittanceManager",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "codeA",
+          "type": "bytes32"
+        },
+        {
+          "name": "codeB",
+          "type": "bytes32"
+        }
+      ],
+      "name": "collectRemittance",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "password",
+          "type": "bytes32"
+        },
+        {
+          "name": "timeValid",
+          "type": "uint256"
+        }
+      ],
+      "name": "newRemittance",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": true,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "killSwitch",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "password",
+          "type": "bytes32"
+        }
+      ],
+      "name": "returnExpiredRemittance",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "blockTime",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "password",
+          "type": "bytes32"
+        }
+      ],
+      "name": "LogNewRemittance",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "collector",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "password",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "blockNumber",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogCollectedRemittance",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "password",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "blockNumber",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogExpiredRemittance",
+      "type": "event"
+    }
+  ],
+  "unlinked_binary": "0x60606040525b60008054600160a060020a03191633600160a060020a03161790555b5b61041f806100316000396000f300606060405263ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166336378e8f811461005e57806394749e7c1461008b578063ada14698146100ad578063cfeea67e146100d4575b600080fd5b341561006957600080fd5b6100776004356024356100fe565b604051901515815260200160405180910390f35b61007760043560243561020c565b604051901515815260200160405180910390f35b34156100b857600080fd5b6100776102e7565b604051901515815260200160405180910390f35b34156100df57600080fd5b610077600435610311565b604051901515815260200160405180910390f35b6000806000808585336040519283526020830191909152600160a060020a03166c01000000000000000000000000026040808301919091526054909101905190819003902060008181526001602052604090206002810154919450925043901161016757600080fd5b506001810180546000909155600160a060020a03331681156108fc0282604051600060405180830381858888f1935050505015156101a457600080fd5b7f0e0ca3526a2b5f2138fae0622b2f53e694dcb12858895d5a59baca35ebd7598433828543604051600160a060020a039094168452602084019290925260408084019190915260608301919091526080909101905180910390a1600193505b50505092915050565b600060606040519081016040908152600160a060020a0333168252346020808401919091524385018284015260008681526001909152208151815473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0391909116178155602082015181600101556040820151600290910155507f4e78744329217f73ea928ee72758cce3ad70596584314be7e08d3e8f94645f9333348486604051600160a060020a039094168452602084019290925260408084019190915260608301919091526080909101905180910390a15060015b92915050565b6000805433600160a060020a039081169116141561030d57600054600160a060020a0316ff5b5b90565b6000818152600160205260408120600281015482904390111561033357600080fd5b815433600160a060020a0390811691161461034d57600080fd5b5060018101805460009091558154600160a060020a031681156108fc0282604051600060405180830381858888f19350505050151561038b57600080fd5b81547f492382ddd97a3c395bafdea84bc6236acfbe6d7fee861b2acb2ea3e26cfdcf5f90600160a060020a03168543604051600160a060020a03909316835260208301919091526040808301919091526060909101905180910390a1600192505b50509190505600a165627a7a7230582067edfc8e5ded50ae8eea274f2a7187e6ef95a1d85849e6f18e015a252735bcb00029",
+  "networks": {
+    "1503195934307": {
+      "events": {
+        "0xc419c52a9fad6dfc8cbddfd8c123781ad0528701133340b62f1200d0afbd6cb7": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "collector",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "blockTime",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "password",
+              "type": "bytes32"
+            }
+          ],
+          "name": "LogNewRemittance",
+          "type": "event"
+        },
+        "0x0e0ca3526a2b5f2138fae0622b2f53e694dcb12858895d5a59baca35ebd75984": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "collector",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "password",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "name": "blockNumber",
+              "type": "uint256"
+            }
+          ],
+          "name": "LogCollectedRemittance",
+          "type": "event"
+        },
+        "0x492382ddd97a3c395bafdea84bc6236acfbe6d7fee861b2acb2ea3e26cfdcf5f": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "password",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "name": "blockNumber",
+              "type": "uint256"
+            }
+          ],
+          "name": "LogExpiredRemittance",
+          "type": "event"
+        },
+        "0x4e78744329217f73ea928ee72758cce3ad70596584314be7e08d3e8f94645f93": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "blockTime",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "password",
+              "type": "bytes32"
+            }
+          ],
+          "name": "LogNewRemittance",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x369eb699cd8fbcb0bb12aaf63250659d6fcfca37",
+      "updated_at": 1503258916820
+    }
+  },
+  "schema_version": "0.0.5",
+  "updated_at": 1503258916820
+}
