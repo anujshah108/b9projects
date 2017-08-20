@@ -27,6 +27,9 @@ contract RemittanceManager is Owned {
 
 	// sender of the remittance does hash of codeA, codeB, perhaps on frontend
 	function newRemittance(bytes32 password, uint timeValid) payable returns (bool) {
+		
+		//require(!pendingRemittances[password]) do a check if they exist already (need to see if this will)
+
 		pendingRemittances[password] = Remittance({
 
 			sender: msg.sender,

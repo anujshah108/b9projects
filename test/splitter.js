@@ -9,10 +9,9 @@ contract('SplitterManager', function(accounts) {
       instance = _instance
       return instance.createSplitter(accounts[2],accounts[1],{from:accounts[0], value:10});
     }).then(function(txHash) {
-    return instance.withdrawFunds({from:accounts[2]});
-  }).then(function(txHash){
-       console.log("HELLLLLLLLLO", txHash)
-      assert.equal(instance.contract.getBalance(accounts[2])-original_balance, 5, "10000 wasn't in the first account");
+    return instance.fundsOwed(accounts[2]);
+  }).then(function(value){
+      assert.equal(value, 5, "10000 wasn't in the first account");
     });
   });
 
