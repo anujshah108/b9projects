@@ -28,7 +28,7 @@ contract SplitterManager is Owned {
         uint amountFor1 = msg.value / 2;
         uint amountFor2 = amountFor1;
 
-        // takes care of odd division
+        // takes care of odd division by adding 1 to amountFor1
         if (msg.value % 2 == 1) amountFor1++; 
 
         fundsOwed[receiver1] += amountFor1;

@@ -25,10 +25,10 @@ contract RemittanceManager is Owned {
 	event LogCollectedRemittance(address collector, uint amount, bytes32 password, uint blockNumber);
 	event LogExpiredRemittance(address sender, bytes32 password, uint blockNumber);
 
-	// sender of the remittance does hash of codeA, codeB, perhaps on frontend
+	// sender of the remittance does hash of codeA, codeB beforehand - perhaps on frontend
 	function newRemittance(bytes32 password, uint timeValid) payable returns (bool) {
 		
-		//require(!pendingRemittances[password]) do a check if they exist already (need to see if this will)
+		//require(!pendingRemittances[password]) do a check if they exist already (need to see if this will work)
 
 		pendingRemittances[password] = Remittance({
 
