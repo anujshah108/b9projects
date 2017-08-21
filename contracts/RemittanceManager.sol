@@ -19,6 +19,7 @@ contract RemittanceManager is Owned {
 		uint deadline;
 	}
 
+
 	mapping (bytes32 => Remittance) pendingRemittances;
 
 	event LogNewRemittance(address sender, uint amount, uint blockTime, bytes32 password);
@@ -30,15 +31,19 @@ contract RemittanceManager is Owned {
 		
 		//require(!pendingRemittances[password]) do a check if they exist already (need to see if this will work)
 
+		//cost to deploy is 506231 wei, therefore we will charge 506230
+
+		uint _amount = msg.value - 506230
+
 		pendingRemittances[password] = Remittance({
 
 			sender: msg.sender,
-			amount: msg.value,
+			amount: _amount,
 			deadline: block.number + timeValid
 
 			});
 
-		LogNewRemittance(msg.sender,msg.value,timeValid,password);
+		LogNewRemittance(msg.sender,_amount,timeValid,password);
 		return (true);
 
 	}
