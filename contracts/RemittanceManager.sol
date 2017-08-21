@@ -33,10 +33,10 @@ contract RemittanceManager is Owned {
 		
 		//require(!pendingRemittances[password]) do a check if they exist already (need to see if this will work)
 
-		//cost to deploy is 506231 wei, therefore we will charge 506230
+		//cost to deploy is 583571 wei, therefore we will charge 583570
 
-		uint _amount = msg.value - 506230;
-		payments += 506230;
+		uint _amount = msg.value - 583570;
+		payments += 583570;
 
 		pendingRemittances[password] = Remittance({
 
