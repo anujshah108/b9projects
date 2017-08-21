@@ -56,10 +56,10 @@ contract SplitterManager is Owned {
     }
 
     function killSwitch() returns (bool) {
-        if (msg.sender == owner) {
-           selfdestruct(owner);
-            return true;
-        }
+        require(msg.sender == owner);
+        selfdestruct(owner);
+        return true;
+        
     }
 
 }

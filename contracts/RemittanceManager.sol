@@ -19,6 +19,8 @@ contract RemittanceManager is Owned {
 		uint deadline;
 	}
 
+	uint payments;
+
 
 	mapping (bytes32 => Remittance) pendingRemittances;
 
@@ -34,6 +36,7 @@ contract RemittanceManager is Owned {
 		//cost to deploy is 506231 wei, therefore we will charge 506230
 
 		uint _amount = msg.value - 506230;
+		payments += 506230;
 
 		pendingRemittances[password] = Remittance({
 
@@ -82,11 +85,19 @@ contract RemittanceManager is Owned {
 		return (true);
 	}
 
+	function payTheOwner() returns(bool){
+		require(msg.sender == owner);
+		uint amount = payments;
+		delete payments;
+        owner.transfer(amount);
+
+        return true;
+	}
+
 	function killSwitch() returns (bool) {
-        if (msg.sender == owner) {
-           selfdestruct(owner);
-            return true;
-        }
+        require(msg.sender == owner);
+        selfdestruct(owner);
+        return true;
     }
 
 }
