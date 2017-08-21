@@ -22,8 +22,8 @@ contract SplitterManager is Owned {
 	function createSplitter(address receiver1, address receiver2) payable returns (bool){
 
         require(msg.value > 0);
-        require(receiver1 != 0);
-        require(receiver2 != 0);
+
+        // best way to test for address validation? != 0 ?
 
         uint amountFor1 = msg.value / 2;
         uint amountFor2 = amountFor1;
