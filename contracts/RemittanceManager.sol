@@ -1,4 +1,4 @@
-pragma solidity ^0.4.6;
+pragma solidity ^0.4.11;
 
 
 contract Owned {
@@ -46,12 +46,15 @@ contract RemittanceManager is Owned {
 	//thinking of adding a way to hash codes on front end so they are not sent to blockchain but then would need to still verify sender
 	function collectRemittance(bytes32 codeA, bytes32 codeB) returns(bool){
 		bytes32 password = keccak256(codeA, codeB);
+
+		//require(!pendingRemittances[password]); again check if this is possible or needed
+
 		Remittance storage currentRemittance = pendingRemittances[password];
 
 		require(currentRemittance.deadline > block.number);
 
 		uint amount = currentRemittance.amount;
-		currentRemittance.amount = 0;
+		delete currentRemittance.amount;
 
 		msg.sender.transfer(amount);
 
@@ -66,7 +69,7 @@ contract RemittanceManager is Owned {
 		require(msg.sender == currentRemittance.sender);
 
 		uint amount = currentRemittance.amount;
-		currentRemittance.amount = 0;
+		delete currentRemittance.amount;
 
 		currentRemittance.sender.transfer(amount);
 

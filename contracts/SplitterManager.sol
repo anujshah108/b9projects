@@ -1,4 +1,4 @@
-pragma solidity ^0.4.6;
+pragma solidity ^0.4.11;
 
 
 contract Owned {
@@ -27,7 +27,9 @@ contract SplitterManager is Owned {
 
         uint amountFor1 = msg.value / 2;
         uint amountFor2 = amountFor1;
-        if (msg.value % 2 == 1) amountFor1++; // takes care of odd division
+
+        // takes care of odd division
+        if (msg.value % 2 == 1) amountFor1++; 
 
         fundsOwed[receiver1] += amountFor1;
         fundsOwed[receiver2] += amountFor2;
@@ -43,7 +45,7 @@ contract SplitterManager is Owned {
         require(fundsOwed[msg.sender] > 0);
 
         uint amount = fundsOwed[msg.sender];
-        fundsOwed[msg.sender] = 0;
+        delete fundsOwed[msg.sender];
 
         msg.sender.transfer(amount);
 
