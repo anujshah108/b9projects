@@ -33,7 +33,7 @@ contract RemittanceManager is Owned {
 
 		//cost to deploy is 506231 wei, therefore we will charge 506230
 
-		uint _amount = msg.value - 506230
+		uint _amount = msg.value - 506230;
 
 		pendingRemittances[password] = Remittance({
 
