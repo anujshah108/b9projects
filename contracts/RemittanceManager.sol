@@ -91,13 +91,13 @@ contract RemittanceManager is Owned {
 		delete payments;
         owner.transfer(amount);
 
-        return true;
+        return (true);
 	}
 
 	function killSwitch() returns (bool) {
         require(msg.sender == owner);
         selfdestruct(owner);
-        return true;
+        return (true);
     }
 
 }

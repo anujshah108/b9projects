@@ -11,27 +11,26 @@ contract('SplitterManager', function(accounts) {
     }).then(function(txHash) {
     return instance.fundsOwed(accounts[2]);
   }).then(function(value){
-      assert.equal(value, 5, "10000 wasn't in the first account");
+      assert.equal(value, 5, "value did not get split properly");
     });
   });
 
-//   it("should call a function that depends on a linked library", function() {
-//     var meta;
-//     var metaCoinBalance;
-//     var metaCoinEthBalance;
-
-//     return MetaCoin.deployed().then(function(instance) {
-//       meta = instance;
-//       return meta.getBalance.call(accounts[0]);
-//     }).then(function(outCoinBalance) {
-//       metaCoinBalance = outCoinBalance.toNumber();
-//       return meta.getBalanceInEth.call(accounts[0]);
-//     }).then(function(outCoinBalanceEth) {
-//       metaCoinEthBalance = outCoinBalanceEth.toNumber();
-//     }).then(function() {
-//       assert.equal(metaCoinEthBalance, 2 * metaCoinBalance, "Library function returned unexpected function, linkage may be broken");
-//     });
-//   });
+   it("sends money to the collector", function() {
+    return SplitterManager.deployed().then(function(_instance) {
+      instance = _instance
+      // console.log(instance.contract._eth.getBalance(accounts[0])) or web3.eth
+      console.log(web3.eth.getBalance(instance.address).toString(10))
+      return instance.createSplitter(accounts[2],accounts[1],{from:accounts[0], value:10});
+    }).then(function(txHash) {
+    // original_balance = instance.balance()
+    return instance.withdrawFunds({from:accounts[2]});
+  }).then(function(txHash){
+     return instance.fundsOwed(accounts[2]);
+  }).then(function(value){
+      assert.equal(value, 0, "value was not withdrawn from account");
+     // assert.equal(original_balance-5, instance.balance(), "value was not withdrawn from account");
+    });
+  });
 
 
   
