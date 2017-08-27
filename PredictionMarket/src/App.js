@@ -7,9 +7,7 @@ import './css/open-sans.css'
 import './css/pure-min.css'
 import './App.css'
 
-//things to add
-//blur out withdraw when no funds to withdraw
-//set "alredy bet" when there is a bet in the question
+//todo add a way to null withdrawals of the wrong bet ("you bet wrong or something")
 
 class App extends Component {
   constructor(props) {
@@ -71,7 +69,7 @@ class App extends Component {
                    numQ = num.c[0]
                    for(let i=0;i<numQ;i++){
                      instance.getQuestionInfo(i)
-                    .then(info => this.state.questions.push({ID:info[0], answered:info[1],question:info[2]}))
+                    .then(info => this.state.questions.push({ID:info[0], answered:info[1],question:info[2],amount:info[3].c[0]}))
              }})
             .then(isAdmin => instance.Admins(accounts[0]))
             .then(bool => this.setState({isAdmin:bool}))
@@ -86,6 +84,7 @@ class App extends Component {
     return this.state.instance.addQuestion(this.state.questionToSubmit, {from:this.state.accounts[0]})
             .then(tx => {
               console.log(tx.logs[0].args)
+              tx.logs[0].args.amount = 0
               this.state.questions.push(tx.logs[0].args)
               this.setState({questionToSubmit:""})
             })
@@ -96,6 +95,7 @@ class App extends Component {
             .then(tx => {
               console.log(tx.logs[0].args)
               this.setState({betAnswer:""})
+              this.state.questions[id].amount = this.state.betAmount
               this.setState({betAmout:0})
             })
 
@@ -105,6 +105,7 @@ class App extends Component {
      return this.state.instance.addAnswer(id, this.state.answer, {from:this.state.accounts[0]})
             .then(tx => {
               console.log(tx.logs[0].args)
+              this.state.questions[id].answered = true
               this.setState({answer:""})
             })
   }
@@ -152,26 +153,28 @@ class App extends Component {
                 <tr className="collection " key={question.ID}>
                       <td>{question.ID.c[0]}</td>
                       <td>{question.question}</td>
-                         <td>{question.answered ? "Answered - No More Bets" : <form onSubmit={(e) => {
+                         <td>{question.answered ? "Answered - No More Bets" : (question.amount < 1 ? <form onSubmit={(e) => {
+                                                                                          e.preventDefault()
                                                                                           this.addABet(question.ID.c[0])
                                                                                           }}>
                                                                                     <input placeholder="Amount" onChange={e => this.setState({ betAmount: e.target.value })}/>
                                                                                     <input placeholder="Yes or No" onChange={e => this.setState({ betAnswer: e.target.value })}/>
                                                                                     <button type="submit">Bet</button>
-                                                                              </form>}
+                                                                              </form> : <div> Bet Already Placed </div>)}
                         </td>
                       <td>{question.answered ? "Answered" : (this.state.isTrustedSource ? ( <div><form onSubmit={(e) => {
+                                                                                    e.preventDefault()
                                                                                     this.answerQuestion(question.ID.c[0])
                                                                                                                       }}>
                                                                                                               <input value={this.state.answer} placeholder="Yes or No" onChange={e => this.setState({ answer: e.target.value })}/>
                                                                                                               <button>Answer</button>
                                                                                                 </form>
-                                                                                            </div>) : (<div> Not Answered Yet - Place Bet </div> ))}
+                                                                                            </div>) : (<div> Not Answered Yet/Not Trusted Source </div> ))}
                       </td>
-                      <td><form onSubmit={(e) => {
+                      <td>{question.amount > 0 ? <form onSubmit={(e) => {
                                                   this.withdrawWinnings(question.ID.c[0])}}>
                                                   <button>Withdraw</button>
-                          </form>
+                                                  </form> : <div> Nothing To Withdraw </div>}
                       </td>
                 </tr>
             )
