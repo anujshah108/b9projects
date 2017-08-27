@@ -139,6 +139,8 @@ contract PredictionMarket{
 
 		question.bets[msg.sender].withdrawn == true;
 
+		// winnings for bets are calculated by the proportion of original bet to the total winning bets over the total of losing bets. 
+
 		uint winningAmount = question.answer == "Yes" ? question.yesAmount : question.noAmount;
 	   	uint losingAmount = question.answer == "Yes" ? question.noAmount : question.yesAmount;
 
