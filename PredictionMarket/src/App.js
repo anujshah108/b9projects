@@ -119,7 +119,7 @@ class App extends Component {
 
   }
 
-    addATrustedSource(event){
+  addATrustedSource(event){
     event.preventDefault();
     return this.state.instance.addTrustedSource(this.state.trustedSourceAddress, {from:this.state.accounts[0]})
             .then(tx => {
@@ -166,7 +166,7 @@ class App extends Component {
                                                                                     e.preventDefault()
                                                                                     this.answerQuestion(question.ID.c[0])
                                                                                                                       }}>
-                                                                                                              <input value={this.state.answer} placeholder="Yes or No" onChange={e => this.setState({ answer: e.target.value })}/>
+                                                                                                              <input placeholder="Yes or No" onChange={e => this.setState({ answer: e.target.value })}/>
                                                                                                               <button>Answer</button>
                                                                                                 </form>
                                                                                             </div>) : (<div> Not Answered Yet/Not Trusted Source </div> ))}
