@@ -31,7 +31,7 @@
 
 6. In the UI(Mist or MetaMask) or Truffle Console you can assign an address to be "Trusted Source" from an "Admin" account. 
 
-7. You can add your TestRPC accounts to the "Private Network" in MetaMask and switch between "Admin".,"Trusted Source" or "Regular User" and the UI changes views for each of them. 
+7. You can add your TestRPC accounts to the "Private Network" in MetaMask and switch between "Admin","Trusted Source" or "Regular User" and the UI changes views for each of them. 
 
 *Everytime you switch between MetaMask accounts you will have to reload the page for the app to get linked to your account. 
 

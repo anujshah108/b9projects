@@ -16,8 +16,6 @@ contract PredictionMarket{
 		string question;
 		bytes32 answer;
 		uint ID;
-		uint yesCount;
-		uint noCount;
 		uint noAmount;
 		uint yesAmount;
 
@@ -72,8 +70,6 @@ contract PredictionMarket{
             exists: true,
             answered: false,
             answer: "",
-            yesCount: 0,
-            noCount: 0,
             yesAmount:0,
             noAmount:0
  
@@ -84,6 +80,8 @@ contract PredictionMarket{
 		return (true, questionID);
 
 	}
+
+	//working on enums for "Yes" and "No"
 	
 	function addBet(uint _questionID, bytes32 _answer) 
 		payable 

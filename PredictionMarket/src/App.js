@@ -7,6 +7,10 @@ import './css/open-sans.css'
 import './css/pure-min.css'
 import './App.css'
 
+//things to add
+//blur out withdraw when no funds to withdraw
+//set "alredy bet" when there is a bet in the question
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -55,7 +59,6 @@ class App extends Component {
     const contract = require('truffle-contract')
     const PredictionInstance = contract(PredictionContract)
     PredictionInstance.setProvider(this.state.web3.currentProvider)
-
 
     // Get accounts.
     this.state.web3.eth.getAccounts((error, accounts) => {
@@ -152,17 +155,18 @@ class App extends Component {
                          <td>{question.answered ? "Answered - No More Bets" : <form onSubmit={(e) => {
                                                                                           this.addABet(question.ID.c[0])
                                                                                           }}>
-                                                                          <input placeholder="Amount" onChange={e => this.setState({ betAmount: e.target.value })}/>
-                                                                          <input placeholder="Yes or No" onChange={e => this.setState({ betAnswer: e.target.value })}/>
-                                                                          <button type="submit">Bet</button>
-                                                                    </form>}
+                                                                                    <input placeholder="Amount" onChange={e => this.setState({ betAmount: e.target.value })}/>
+                                                                                    <input placeholder="Yes or No" onChange={e => this.setState({ betAnswer: e.target.value })}/>
+                                                                                    <button type="submit">Bet</button>
+                                                                              </form>}
                         </td>
                       <td>{question.answered ? "Answered" : (this.state.isTrustedSource ? ( <div><form onSubmit={(e) => {
                                                                                     this.answerQuestion(question.ID.c[0])
-                                                                                    }}>
-                                                                            <input value={this.state.answer} placeholder="Yes or No" onChange={e => this.setState({ answer: e.target.value })}/>
-                                                                            <button>Answer</button>
-                                                              </form></div>) : (<div> Not Answered Yet - Place Bet </div> ))}
+                                                                                                                      }}>
+                                                                                                              <input value={this.state.answer} placeholder="Yes or No" onChange={e => this.setState({ answer: e.target.value })}/>
+                                                                                                              <button>Answer</button>
+                                                                                                </form>
+                                                                                            </div>) : (<div> Not Answered Yet - Place Bet </div> ))}
                       </td>
                       <td><form onSubmit={(e) => {
                                                   this.withdrawWinnings(question.ID.c[0])}}>
@@ -185,6 +189,7 @@ class App extends Component {
               <h1>Welcome to The Prediction Market!</h1>
               <p>Anybody can place a bet! You can add a question if you an admin or answer if you are a trusted source!</p>
               <h5>Contract Address: {this.state.instance.address}</h5>
+              <h5>Your Address: {this.state.accounts[0]}</h5>
               <br/> 
               {adminScene}
               <br/>
