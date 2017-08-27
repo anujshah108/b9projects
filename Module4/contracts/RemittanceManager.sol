@@ -31,7 +31,7 @@ contract RemittanceManager is Owned {
 	// sender of the remittance does hash of codeA, codeB beforehand - perhaps on frontend
 	function newRemittance(bytes32 password, uint timeValid) payable returns (bool) {
 		
-		//require(!pendingRemittances[password]) do a check if they exist already (need to see if this will work)
+		//require(!pendingRemittances[password]) you can't do this have to check a bool
 
 		//cost to deploy is 583571 wei, therefore we will charge 583570
 
@@ -54,8 +54,6 @@ contract RemittanceManager is Owned {
 	//thinking of adding a way to hash codes on front end so they are not sent to blockchain but then would need to still verify sender
 	function collectRemittance(bytes32 codeA, bytes32 codeB) returns(bool){
 		bytes32 password = keccak256(codeA, codeB);
-
-		//require(!pendingRemittances[password]); again check if this is possible or needed
 
 		Remittance storage currentRemittance = pendingRemittances[password];
 

@@ -1,0 +1,639 @@
+{
+  "contract_name": "PredictionMarket",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "Admins",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_questionID",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdrawWinnings",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_questionID",
+          "type": "uint256"
+        }
+      ],
+      "name": "getQuestionInfo",
+      "outputs": [
+        {
+          "name": "ID",
+          "type": "uint256"
+        },
+        {
+          "name": "answered",
+          "type": "bool"
+        },
+        {
+          "name": "questionText",
+          "type": "string"
+        },
+        {
+          "name": "userbetAmount",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_questionID",
+          "type": "uint256"
+        },
+        {
+          "name": "_answer",
+          "type": "bytes32"
+        }
+      ],
+      "name": "addBet",
+      "outputs": [
+        {
+          "name": "ok",
+          "type": "bool"
+        }
+      ],
+      "payable": true,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "TrustedSources",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "Questions",
+      "outputs": [
+        {
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "name": "exists",
+          "type": "bool"
+        },
+        {
+          "name": "answered",
+          "type": "bool"
+        },
+        {
+          "name": "question",
+          "type": "string"
+        },
+        {
+          "name": "answer",
+          "type": "bytes32"
+        },
+        {
+          "name": "ID",
+          "type": "uint256"
+        },
+        {
+          "name": "yesCount",
+          "type": "uint256"
+        },
+        {
+          "name": "noCount",
+          "type": "uint256"
+        },
+        {
+          "name": "noAmount",
+          "type": "uint256"
+        },
+        {
+          "name": "yesAmount",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_questionID",
+          "type": "uint256"
+        },
+        {
+          "name": "_answer",
+          "type": "bytes32"
+        }
+      ],
+      "name": "addAnswer",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "numOfQuestions",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "questionIDs",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "trustedSource",
+          "type": "address"
+        }
+      ],
+      "name": "addTrustedSource",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_question",
+          "type": "string"
+        }
+      ],
+      "name": "addQuestion",
+      "outputs": [
+        {
+          "name": "ok",
+          "type": "bool"
+        },
+        {
+          "name": "questionID",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "ID",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "question",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "name": "answered",
+          "type": "bool"
+        }
+      ],
+      "name": "LogQuestionAddition",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "newTrustedSource",
+          "type": "address"
+        }
+      ],
+      "name": "LogTrustedSourceAddition",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "ID",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "questionAnswer",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "betAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogBetAddition",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "ID",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "withdrawAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogWithdrawingFunds",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "ID",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "answer",
+          "type": "bytes32"
+        }
+      ],
+      "name": "LogAnsweredQuestion",
+      "type": "event"
+    }
+  ],
+  "unlinked_binary": "0x6060604052341561000f57600080fd5b5b600160a060020a0333166000908152602081905260409020805460ff191660011790555b5b610f57806100446000396000f300606060405236156100ac5763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416630ec6d58a81146100b157806314794702146100e457806348df63241461010e5780636530a400146101b457806366360f7d146101d65780639dafd859146102095780639e618f67146102fd578063b6f29ef81461032a578063d1d507ba1461034f578063e578227814610377578063f129dbd9146103aa575b600080fd5b34156100bc57600080fd5b6100d0600160a060020a0360043516610415565b604051901515815260200160405180910390f35b34156100ef57600080fd5b6100d060043561042a565b604051901515815260200160405180910390f35b341561011957600080fd5b6101246004356106f1565b60405184815283151560208201526060810182905260806040820181815290820184818151815260200191508051906020019080838360005b838110156101765780820151818401525b60200161015d565b50505050905090810190601f1680156101a35780820380516001836020036101000a031916815260200191505b509550505050505060405180910390f35b6100d0600435602435610814565b604051901515815260200160405180910390f35b34156101e157600080fd5b6100d0600160a060020a03600435166109b9565b604051901515815260200160405180910390f35b341561021457600080fd5b61021f6004356109ce565b604051600160a060020a038b168152891515602082015288151560408201526080810187905260a0810186905260c0810185905260e081018490526101008082018490526101208201839052610140606083018181528a54600260018216159094026000190116929092049083018190526101608301908a9080156102e55780601f106102ba576101008083540402835291602001916102e5565b820191906000526020600020905b8154815290600101906020018083116102c857829003601f168201915b50509b50505050505050505050505060405180910390f35b341561030857600080fd5b6100d0600435602435610a30565b604051901515815260200160405180910390f35b341561033557600080fd5b61033d610b46565b60405190815260200160405180910390f35b341561035a57600080fd5b61033d600435610b4c565b60405190815260200160405180910390f35b341561038257600080fd5b6100d0600160a060020a0360043516610b6f565b604051901515815260200160405180910390f35b34156103b557600080fd5b6103fb60046024813581810190830135806020601f82018190048102016040519081016040528181529291906020840183838082843750949650610c0e95505050505050565b604051911515825260208201526040908101905180910390f35b60006020819052908152604090205460ff1681565b6000818152600260205260408120805482908190819060a060020a900460ff16151561045557600080fd5b835460a860020a900460ff16151561055057600160a060020a033316600090815260088501602052604090206003015460ff161561049257600080fd5b600160a060020a0333166000818152600886016020526040808220600281018054939055600301805460ff1916600117905590945084156108fc0290859051600060405180830381858888f1935050505015156104ee57600080fd5b7f432c5e255f9d6d8cdf325689addc2d526e6ba5e8d1c790f14bc3630e8dbc80453387856040518084600160a060020a0316600160a060020a03168152602001838152602001828152602001935050505060405180910390a1600194506106e8565b6002840154600160a060020a03331660009081526008860160205260409020600101541461057d57600080fd5b600160a060020a033316600090815260088501602052604090206003015460ff16156105a857600080fd5b600160a060020a03331660005260088401602052600284015460e860020a6259657302146105da5783600601546105e0565b83600701545b600285015490925060e860020a625965730214610601578360070154610607565b83600601545b600160a060020a03331660009081526008860160205260409020600201549091508190839081151561063557fe5b600160a060020a03331660008181526008890160205260408082206002018054929055939092049390930201945084156108fc0290859051600060405180830381858888f19350505050151561068a57600080fd5b7f432c5e255f9d6d8cdf325689addc2d526e6ba5e8d1c790f14bc3630e8dbc80453387856040518084600160a060020a0316600160a060020a03168152602001838152602001828152602001935050505060405180910390a1600194505b50505050919050565b6000806106fc610e79565b6000848152600260205260408120805460a060020a900460ff16151561072157600080fd5b80600301548160000160159054906101000a900460ff168260010183600801600033600160a060020a0316600160a060020a0316815260200190815260200160002060020154818054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156107fc5780601f106107d1576101008083540402835291602001916107fc565b820191906000526020600020905b8154815290600101906020018083116107df57829003601f168201915b5050505050915094509450945094505b509193509193565b6000803481901161082457600080fd5b506000838152600260205260409020805460a060020a900460ff16151561084a57600080fd5b805460a860020a900460ff161561086057600080fd5b60e860020a625965730283148061087e575060f060020a614e6f0283145b151561088957600080fd5b60e860020a62596573028314156108a557600781018054340190555b60f060020a614e6f028314156108c057600681018054340190555b60806040519081016040908152600160a060020a03331680835260208084018790523483850152600060608501819052918252600885019052208151815473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a039190911617815560208201516001820155604082015181600201556060820151600391909101805460ff1916911515919091179055507f8ce346ed10168628971309a72645f6ccb59b29b65b3ea5e375495f3584b7db5b33858534604051600160a060020a039094168452602084019290925260408084019190915260608301919091526080909101905180910390a1600191505b5092915050565b60016020526000908152604090205460ff1681565b600260208190526000918252604090912080549181015460038201546004830154600584015460068501546007860154600160a060020a0388169760ff60a060020a820481169860a860020a909204169660019091019590949093909290918a565b600160a060020a033316600090815260016020526040812054819060ff161515610a5957600080fd5b60e860020a6259657302831480610a77575060f060020a614e6f0283145b1515610a8257600080fd5b506000838152600260205260409020805460a060020a900460ff161515610aa857600080fd5b805460a860020a900460ff1615610abe57600080fd5b60028101839055805475ff000000000000000000000000000000000000000000191660a860020a1781557fc3c72701058c3b35b8149fcddb76f42dbaf473ac1e5adcd2a6d8d1a166e4e142338585604051600160a060020a03909316835260208301919091526040808301919091526060909101905180910390a1600191505b5b5092915050565b60035481565b6004805482908110610b5a57fe5b906000526020600020900160005b5054905081565b600160a060020a03331660009081526020819052604081205460ff161515610b9657600080fd5b600160a060020a038216600090815260016020819052604091829020805460ff191690911790557f7b46d992991123caf3904d15438dcf5a980639a7d9d6f190000d80a4b88a1374903390849051600160a060020a039283168152911660208201526040908101905180910390a15060015b5b919050565b600160a060020a033316600090815260208190526040812054819060ff161515610c3757600080fd5b5060035460008181526002602052604090205460a060020a900460ff1615610c5e57600080fd5b6003805460010190556101406040519081016040908152600160a060020a033316825260016020808401919091526000828401819052606084018790526080840181905260a0840185905260c0840181905260e08401819052610100840181905261012084018190528481526002909152208151815473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a03919091161781556020820151815490151560a060020a0274ff0000000000000000000000000000000000000000199091161781556040820151815490151560a860020a0275ff00000000000000000000000000000000000000000019909116178155606082015181600101908051610d6f929160200190610e8b565b506080820151600282015560a0820151816003015560c0820151816004015560e082015181600501556101008201518160060155610120820151600790910155507fb97409eea000e635fb7c9cb81eb001412a7a78b0e831e6ec792d5138cdef51403382856000604051600160a060020a038516815260208101849052811515606082015260806040820181815290820184818151815260200191508051906020019080838360005b83811015610e315780820151818401525b602001610e18565b50505050905090810190601f168015610e5e5780820380516001836020036101000a031916815260200191505b509550505050505060405180910390a1600191505b5b915091565b60206040519081016040526000815290565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f10610ecc57805160ff1916838001178555610ef9565b82800160010185558215610ef9579182015b82811115610ef9578251825591602001919060010190610ede565b5b50610f06929150610f0a565b5090565b610f2891905b80821115610f065760008155600101610f10565b5090565b905600a165627a7a72305820543f337e23238c1e021718653defb5448acdafb2ec643bec98868b51bb20a4770029",
+  "networks": {
+    "1503762787443": {
+      "events": {
+        "0xdf593c01aa2f7c955ab35aee0623fe0744c2117efb32343667f5b9660e9d5049": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "whoAdded",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "newAdmin",
+              "type": "address"
+            }
+          ],
+          "name": "LogAddAdmin",
+          "type": "event"
+        },
+        "0x9b01f99464ccdf6f875bc8a247379c60987d884732071e6d65d4dbb6d535f592": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "whoAdded",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "questionID",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "name": "questions",
+              "type": "string"
+            }
+          ],
+          "name": "LogAddQuestion",
+          "type": "event"
+        },
+        "0x5a6e73d04f46c9cfea0b28adccbaa7ff09d2f0dacfa37ceffdc6ba1127fa53c4": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "whoAdded",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "trustedSource",
+              "type": "address"
+            }
+          ],
+          "name": "LogAddTrustedSource",
+          "type": "event"
+        },
+        "0xa4224b69a70bd6bb809aea1d6d3aa705f49edabfa2a8d8576ddc48775ece1e8c": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "whoBet",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "questionID",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "name": "questionAnswer",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "name": "betAmount",
+              "type": "uint256"
+            }
+          ],
+          "name": "LogBet",
+          "type": "event"
+        },
+        "0xf40fcec21964ffb566044d083b4073f29f7f7929110ea19e1b3ebe375d89055e": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "deployer",
+              "type": "address"
+            }
+          ],
+          "name": "Deployed",
+          "type": "event"
+        },
+        "0xa98b3f6ebf86918d263f250e23da6d2e1a44a5250031fbe60afcdffb52645dec": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "adder",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "newAdmin",
+              "type": "address"
+            }
+          ],
+          "name": "LogAdminAddition",
+          "type": "event"
+        },
+        "0x784a5f8c84cb93e8801010f82f1f5b6a3d35283fbc041c11699edc1e41d61282": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "adder",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "questionID",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "questions",
+              "type": "string"
+            }
+          ],
+          "name": "LogQuestionAddition",
+          "type": "event"
+        },
+        "0x7b46d992991123caf3904d15438dcf5a980639a7d9d6f190000d80a4b88a1374": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "newTrustedSource",
+              "type": "address"
+            }
+          ],
+          "name": "LogTrustedSourceAddition",
+          "type": "event"
+        },
+        "0x8ce346ed10168628971309a72645f6ccb59b29b65b3ea5e375495f3584b7db5b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "ID",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "questionAnswer",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "name": "betAmount",
+              "type": "uint256"
+            }
+          ],
+          "name": "LogBetAddition",
+          "type": "event"
+        },
+        "0xb97409eea000e635fb7c9cb81eb001412a7a78b0e831e6ec792d5138cdef5140": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "ID",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "question",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "answered",
+              "type": "bool"
+            }
+          ],
+          "name": "LogQuestionAddition",
+          "type": "event"
+        },
+        "0x432c5e255f9d6d8cdf325689addc2d526e6ba5e8d1c790f14bc3630e8dbc8045": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "ID",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "withdrawAmount",
+              "type": "uint256"
+            }
+          ],
+          "name": "LogWithdrawingFunds",
+          "type": "event"
+        },
+        "0xc3c72701058c3b35b8149fcddb76f42dbaf473ac1e5adcd2a6d8d1a166e4e142": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "ID",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "answer",
+              "type": "bytes32"
+            }
+          ],
+          "name": "LogAnsweredQuestion",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x2b6863395bfa1a0bc31f6540914fe5028265da07",
+      "updated_at": 1503860529710
+    }
+  },
+  "schema_version": "0.0.5",
+  "updated_at": 1503860529710
+}
