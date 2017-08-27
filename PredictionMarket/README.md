@@ -18,6 +18,9 @@ There are different views per account type:
 - If you withdraw funds after the question is answered, you will get paid only if you provided the right answer in your bet. Your payment will be a piece of the funds that were provided by people who bet the wrong answer, proportional to the amount you bet. 
 
 
+*Everytime you switch between MetaMask accounts you will have to reload the page for the app to get linked to your account. 
+
+
 ## Installation
 
 1. Install truffle and EthereumJS TestRPC.
@@ -40,12 +43,10 @@ There are different views per account type:
 5. `accounts[0]` in TestRPC will automatically be assigned as an "Admin"
     
 
-6. In the UI(Mist or MetaMask) or Truffle Console you can assign an address to be "Trusted Source" from an "Admin" account. 
+6. In the UI(MetaMask) or Truffle Console you can assign an address to be "Trusted Source" from an "Admin" account. 
 
 
 7. You can add your TestRPC accounts to the "Private Network" in MetaMask and switch between "Admin","Trusted Source" or "Regular User" and the UI changes views for each of them. 
-
-*Everytime you switch between MetaMask accounts you will have to reload the page for the app to get linked to your account. 
 
 
 
