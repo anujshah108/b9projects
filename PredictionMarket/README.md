@@ -7,15 +7,14 @@
 
 There are different views per account type:
 
-If your account linked to MetaMask is the admin, your view will allow you to send a yes/no questions, add a trusted source and also bet/withdraw funds. 
+-If your account linked to MetaMask is the admin, your view will allow you to send a yes/no questions, add a trusted source and also bet/withdraw funds. 
 
-If you are a trusted source your view will allow you to answer a question. 
+-If you are a trusted source your view will allow you to answer a question. 
+-Any other users view will allow them to bet and also withdraw funds. 
 
-Any other users view will allow them to bet and also withdraw funds. 
+-If you withdraw funds before an answer, you get your total bet back. 
 
-If you withdraw funds before an answer, you get your total bet back. 
-
-If you withdraw funds after the question is answered, you will get paid only if you provided the right answer in your bet. Your payment will be a piece of the funds that were provided by people who bet the wrong answer, proportional to the amount you bet. 
+-If you withdraw funds after the question is answered, you will get paid only if you provided the right answer in your bet. Your payment will be a piece of the funds that were provided by people who bet the wrong answer, proportional to the amount you bet. 
 
 
 ## Installation
