@@ -3,7 +3,6 @@ pragma solidity ^0.4.11;
 contract PredictionMarket{
 
 	struct Bet {
-		address sender;
 		bytes32 answer;
 		uint amount;
 		bool withdrawn;
@@ -15,7 +14,6 @@ contract PredictionMarket{
 		bool answered;
 		string question;
 		bytes32 answer;
-		uint ID;
 		uint noAmount;
 		uint yesAmount;
 
@@ -23,8 +21,8 @@ contract PredictionMarket{
 
 	}
 
-	mapping(address => bool) public Admins;
-	mapping(address => bool) public TrustedSources;
+	mapping(address => bool) public admins;
+	mapping(address => bool) public trustedSources;
 
 	mapping(uint => Question) public Questions;
 
@@ -104,6 +102,8 @@ contract PredictionMarket{
         	question.noAmount+=msg.value;
         }
 
+        require(question.bets[msg.sender].withdrawn)
+
         question.bets[msg.sender] = Bet({
             sender: msg.sender,
             answer: _answer,
@@ -141,10 +141,13 @@ contract PredictionMarket{
 
 		// winnings for bets are calculated by the proportion of original bet to the total winning bets over the total of losing bets. 
 
-		uint winningAmount = question.answer == "Yes" ? question.yesAmount : question.noAmount;
-	   	uint losingAmount = question.answer == "Yes" ? question.noAmount : question.yesAmount;
+		uint winningAmount;
+        uint losingAmount;
+        (winningAmount, losingAmount) = question.answer == "Yes" ?
+            (question.yesAmount, question.noAmount) :
+            (question.noAmount, question.yesAmount);
 
-	   	question.bets[msg.sender].amount += question.bets[msg.sender].amount/winningAmount * losingAmount;
+	   	question.bets[msg.sender].amount += (question.bets[msg.sender].amount/winningAmount) * losingAmount;
 	    amount = question.bets[msg.sender].amount;
 	   	question.bets[msg.sender].amount = 0;
 	   	msg.sender.transfer(amount);

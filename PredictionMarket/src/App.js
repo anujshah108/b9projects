@@ -69,12 +69,21 @@ class App extends Component {
                    numQ = num.c[0]
                    for(let i=0;i<numQ;i++){
                      instance.getQuestionInfo(i)
-                    .then(info => this.state.questions.push({ID:info[0], answered:info[1],question:info[2],amount:info[3].c[0]}))
+                    .then(info => {
+                      this.state.questions.push({
+                        ID:info[0], 
+                        answered:info[1],
+                        question:info[2],
+                        amount:info[3].c[0]
+                      })
+                      })
+                      .catch(err => console.log("No ID"))
              }})
             .then(isAdmin => instance.Admins(accounts[0]))
             .then(bool => this.setState({isAdmin:bool}))
             .then(isTS => instance.TrustedSources(accounts[0]))
             .then(bool => this.setState({isTrustedSource:bool}))
+            
       })
     })
   }
